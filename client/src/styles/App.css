@@ -232,8 +232,8 @@
   
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px; /* adjust to taste */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 24px;
   }
   
   .project-card {
@@ -241,9 +241,11 @@
     border: 1px solid #eee;
     border-radius: 12px;
     padding: 20px;
+    min-width: 0;                /* lets grid children shrink instead of overflowing */
+    overflow-wrap: anywhere;     /* long titles/URLs wrap */
     transition: border-color 0.2s ease, transform 0.2s ease;
   }
-  
+
   .project-card:hover {
     border-color: #6c5ce7;
     transform: translateY(-4px);
@@ -286,4 +288,69 @@
   
   .github-link:hover {
     text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .app-content {
+      padding: 1.5rem 1rem;
+    }
+  
+    /* About */
+    .about-section {
+      flex-direction: column-reverse; /* photo on top, text below; use "column" for text first */
+      text-align: center;
+      gap: 2rem;
+    }
+  
+    .about-section .profile-photo {
+      width: 220px;
+      height: 220px;
+    }
+  
+    .about-section p {
+      font-size: 1rem;
+      text-align: left;
+    }
+  
+    /* Projects */
+    .projects-section {
+      padding: 32px 0;
+    }
+  
+    .projects-section h1 {
+      font-size: 1.5rem;
+    }
+  
+    /* Same 40px side padding pattern on Home */
+    .home-hero {
+      padding: 0;
+      justify-content: center;
+      text-align: center;
+    }
+  
+    .skills-section {
+      padding: 24px 0 40px;
+      font-size: 1.5rem; /* xx-large is very big on phones */
+    }
+  
+    .social-links {
+      justify-content: center;
+    }
+  
+    .navbar {
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .about-section .profile-photo {
+      width: 180px;
+      height: 180px;
+    }
+  
+    .navbar__links {
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
   }
